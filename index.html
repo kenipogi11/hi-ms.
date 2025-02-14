@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will you be my Valentine?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: #fff1f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .bear-image {
+            width: 100%;
+            max-width: 150px;
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            color: #ff7b85;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #yesBtn {
+            background-color: #88e29f;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            background-color: #72c987;
+        }
+
+        #noBtn {
+            background-color: #f87575;
+            color: white;
+        }
+
+        #noBtn:hover {
+            background-color: #e66060;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #444;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #ff7b85;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            button {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://gifdb.com/images/high/bear-love-bouncing-mocha-with-flowers-n4m0fyne6h4e6y2x.webp" alt="Bear holding flowers" class="bear-image">
+        <h1>WIll you be my Valentine's?</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+        <footer>
+            Made by <a href="#">Kent pogi</a>
+        </footer>
+    </div>
+    <script>
+        const gifs = [
+            "3f7f9ad6-5812-433d-9be4-cd94e38cb9e0.jpg",
+            "432b7485-122a-4c05-9f45-491cab20896c.jpg",
+            "0488bfd3-def3-4780-9199-d651230c8c6b.jpg",
+            "9998878c-0af4-4059-9b42-8c9a33b8e61e.jpg",
+            "a69d7343-86ac-4cc5-8fc3-bf8ce22aa7b5.jpg",
+            "ecb901a2-36c7-44d3-bc59-fe3ef854588c.jpg",
+            "ef87196f-a9c4-43c3-bf94-ae9e581c41f8.jpg",
+            "462559849_1137841674527913_6602332741660640354_n.jpg",
+        ];
+
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        let yesBtnScale = 1;
+
+        noBtn.addEventListener('click', function handleClick() {
+            const randomX = Math.floor(Math.random() * (window.innerWidth - noBtn.offsetWidth - 20));
+            const randomY = Math.floor(Math.random() * (window.innerHeight - noBtn.offsetHeight - 20));
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            const randomGif = gifs[Math.floor(Math.random() * gifs.length)];
+            const gifPopup = document.createElement('div');
+            gifPopup.style.position = 'fixed';
+            gifPopup.style.left = `${randomX}px`;
+            gifPopup.style.top = `${randomY}px`;
+            gifPopup.style.zIndex = '1000';
+            gifPopup.innerHTML = `<img src="${randomGif}" style="width: 100px; max-width: 150px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">`;
+
+            document.body.appendChild(gifPopup);
+
+            setTimeout(() => {
+                gifPopup.remove();
+            }, 2000);
+
+            yesBtnScale += 0.5;
+            yesBtn.style.transform = `scale(${yesBtnScale})`;
+        });
+
+        yesBtn.addEventListener('click', function handleYesClick() {
+            document.body.innerHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #fff1f5; font-family: 'Roboto', sans-serif; text-align: center;">
+                    <div style="background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);">
+                        <h1 style="color: #ff7b85; font-size: 2rem; font-weight: bold;">Yipee! Thank youu ganda mo palagi hehe</h1>
+                        <img src="2970520b7069945d60d4d3482691f9d7.jpg" alt="Bear holding flowers" style="width: 150px; margin: 0 auto 20px;">
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
